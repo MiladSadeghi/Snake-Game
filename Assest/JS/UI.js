@@ -20,27 +20,33 @@ function groundDraw() {
     }
   }
 
-groundDraw()
+
+
+document.addEventListener('keydown', (e) => {
+  if (e.keyCode === 37 && direction !== 'RIGHT') {
+    direction = 'LEFT'
+  } else if (e.keyCode === 38 && direction !== 'DOWN') {
+    direction = 'UP'
+  } else if (e.keyCode === 39 && direction !== 'LEFT') {
+    direction = 'RIGHT'
+  } else if (e.keyCode === 40 && direction !== 'UP') {
+    direction = 'DOWN'
+  }
+})
 
 function draw() {
-  ctx.drawImage(snakeHead, snake[0].x, snake[0].y, 32, 32)
+  groundDraw()
+  ctx.drawImage(snakeHead, snake[0].x, snake[0].y)
+
+  for (let i = 1; i < snake.length; i++) {
+    ctx.fillStyle = '#CEDD36'
+    ctx.fillRect(snake[i].x, snake[i].y, 32, 32)
+  }
 
   ctx.drawImage(foodImg, food.x, food.y, 32, 32)
 
   let snakeX = snake[0].x
   let snakeY = snake[0].y
-
-  document.addEventListener('keydown', (e) => {
-    if (e.keyCode === 37 && direction !== 'RIGHT') {
-      direction = 'LEFT'
-    } else if (e.keyCode === 38 && direction !== 'DOWN') {
-      direction = 'UP'
-    } else if (e.keyCode === 39 && direction !== 'LEFT') {
-      direction = 'RIGHT'
-    } else if (e.keyCode === 40 && direction !== 'UP') {
-      direction = 'DOWN'
-    }
-  })
 
   if(direction === 'LEFT') snakeX -= box
   if(direction === 'UP') snakeY -= box
@@ -52,12 +58,15 @@ function draw() {
     y: snakeY
   }
 
-  for (let i = 0; i < snake.length; i++) {
-    ctx.fillStyle = (i !== 0)? 'green': false
-    ctx.fillRect(snake[i].x,snake[i].y, box, box)
+  if(snakeX === food.x && snakeY === food.y) {
+    food = {
+      x: Math.floor(Math.random() * 40) * box,
+      y: Math.floor(Math.random() * 17) * box,
+    }
+  } else {
+    snake.pop()
   }
 
   snake.unshift(newHead)
 }
-
 const game = setInterval(draw, 250)
