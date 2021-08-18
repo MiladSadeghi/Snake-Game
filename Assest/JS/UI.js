@@ -87,6 +87,12 @@ function draw() {
     snake.pop()
   }
 
+  if(snakeX >= 1280 || snakeX < 0 || snakeY < 0 || snakeY >= 544) {
+    clearInterval(game)
+  }
+
+  console.log(snakeX, snakeY);
+
   snake.unshift(newHead)
 }
 const game = setInterval(draw, 100)
