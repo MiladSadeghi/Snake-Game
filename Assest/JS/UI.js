@@ -1,0 +1,26 @@
+
+function groundDraw() {
+  let widthRes = canvas.clientWidth / 32 
+  let heightRes = canvas.clientHeight / 32 
+
+  console.log(canvas.width, heightRes);
+
+  let y = 0
+  let rowColor = 0
+
+  while (y <= 544) {
+    for (let i = 0; i <= widthRes; i++) {
+      if(rowColor % 2 == 0) {
+        ctx.fillStyle = (i % 2 == 0)? '#273c75':'#40739e'
+        ctx.fillRect(i*32,y, box, box)
+      } else {
+        ctx.fillStyle = (i % 2 == 0)? '#40739e':'#273c75'
+        ctx.fillRect(i*32,y, box, box)
+      }
+    }
+    rowColor += 1 
+    y += 1 * 32
+    }
+  }
+
+groundDraw()
