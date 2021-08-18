@@ -42,6 +42,15 @@ function drawImage1(ctx, img, x, y, angle = 0, scale = 1){
   ctx.restore();
 }
 
+function accident(head, array) {
+  for (let i = 0; i < array.length; i++) {
+    if(head.x === array[i].x && head.y === array[i].y) {
+      return true
+    }
+  }
+  return false
+}
+
 function draw() {
   groundDraw()
   drawImage1(ctx, snakeHead, snake[0].x, snake[0].y, TO_RADIANS * 0)
@@ -87,7 +96,7 @@ function draw() {
     snake.pop()
   }
 
-  if(snakeX >= 1280 || snakeX < 0 || snakeY < 0 || snakeY >= 544) {
+  if(snakeX >= 1280 || snakeX < 0 || snakeY < 0 || snakeY >= 544, accident(newHead, snake)) {
     clearInterval(game)
   }
 
