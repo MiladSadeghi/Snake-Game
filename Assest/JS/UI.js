@@ -23,6 +23,8 @@ function groundDraw() {
 groundDraw()
 
 function draw() {
+  ctx.drawImage(snakeHead, snake[0].x, snake[0].y, 32, 32)
+
   ctx.drawImage(foodImg, food.x, food.y, 32, 32)
 }
 
