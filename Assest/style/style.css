@@ -19,6 +19,8 @@ body {
   width: 100%;
   background-color: #40739e;
   padding: 14.3px;
+  display: flex;
+  align-items: center;
 }
 
 .main-game {
@@ -29,5 +31,10 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 21px 22.5px;
+  padding: 23.4px 22.5px;
+}
+
+.score {
+  font-size: 2rem;
+  margin-left: 20px;
 }
