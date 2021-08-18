@@ -1,9 +1,6 @@
 
 function groundDraw() {
   let widthRes = canvas.clientWidth / 32 
-  let heightRes = canvas.clientHeight / 32 
-
-  console.log(canvas.width, heightRes);
 
   let y = 0
   let rowColor = 0
@@ -24,3 +21,11 @@ function groundDraw() {
   }
 
 groundDraw()
+
+function draw() {
+  ctx.drawImage(foodImg, food.x, food.y, 32, 32)
+  console.log(food.x,food.y);
+  console.log(foodImg);
+}
+
+const game = setInterval(draw, 1000)
