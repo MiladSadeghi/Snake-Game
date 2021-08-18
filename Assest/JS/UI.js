@@ -21,7 +21,6 @@ function groundDraw() {
   }
 
 
-
 document.addEventListener('keydown', (e) => {
   if (e.keyCode === 37 && direction !== 'RIGHT') {
     direction = 'LEFT'
@@ -33,11 +32,20 @@ document.addEventListener('keydown', (e) => {
     direction = 'DOWN'
   }
 })
+var TO_RADIANS = Math.PI/180; 
+function drawImage1(ctx, img, x, y, angle = 0, scale = 1){
+  ctx.save();
+  ctx.translate(x + img.width * scale / 2, y + img.height * scale / 2);
+  ctx.rotate(angle);
+  ctx.translate(- x - img.width * scale / 2, - y - img.height * scale / 2);
+  ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+  ctx.restore();
+}
 
 function draw() {
   groundDraw()
-  ctx.drawImage(snakeHead, snake[0].x, snake[0].y)
-
+  drawImage1(ctx, snakeHead, snake[0].x, snake[0].y, TO_RADIANS * 0)
+  
   for (let i = 1; i < snake.length; i++) {
     ctx.fillStyle = '#CEDD36'
     ctx.fillRect(snake[i].x, snake[i].y, 32, 32)
@@ -48,9 +56,21 @@ function draw() {
   let snakeX = snake[0].x
   let snakeY = snake[0].y
 
-  if(direction === 'LEFT') snakeX -= box
-  if(direction === 'UP') snakeY -= box
-  if(direction === 'RIGHT') snakeX += box
+  if(direction === 'LEFT') {
+    snakeX -= box
+    ctx.clearRect(snake[0].x, snake[0].y, snakeHead.width, snakeHead.height);
+    drawImage1(ctx, snakeHead, snake[0].x, snake[0].y, TO_RADIANS * 90)
+  } 
+  if(direction === 'UP'){
+    snakeY -= box
+    ctx.clearRect(snake[0].x, snake[0].y, snakeHead.width, snakeHead.height);
+    drawImage1(ctx, snakeHead, snake[0].x, snake[0].y, TO_RADIANS * 180)
+  }
+  if(direction === 'RIGHT') {
+    snakeX += box
+    ctx.clearRect(snake[0].x, snake[0].y, snakeHead.width, snakeHead.height);
+    drawImage1(ctx, snakeHead, snake[0].x, snake[0].y, TO_RADIANS * 270)
+  }
   if(direction === 'DOWN') snakeY += box
 
   let newHead = {
@@ -69,4 +89,4 @@ function draw() {
 
   snake.unshift(newHead)
 }
-const game = setInterval(draw, 250)
+const game = setInterval(draw, 100)
