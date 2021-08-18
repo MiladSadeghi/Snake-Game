@@ -24,8 +24,6 @@ groundDraw()
 
 function draw() {
   ctx.drawImage(foodImg, food.x, food.y, 32, 32)
-  console.log(food.x,food.y);
-  console.log(foodImg);
 }
 
 const game = setInterval(draw, 1000)
