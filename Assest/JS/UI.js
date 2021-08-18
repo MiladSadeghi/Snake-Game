@@ -51,6 +51,13 @@ function draw() {
     x: snakeX,
     y: snakeY
   }
+
+  for (let i = 0; i < snake.length; i++) {
+    ctx.fillStyle = (i !== 0)? 'green': false
+    ctx.fillRect(snake[i].x,snake[i].y, box, box)
+  }
+
+  snake.unshift(newHead)
 }
 
-const game = setInterval(draw, 1000)
+const game = setInterval(draw, 250)
