@@ -15,10 +15,10 @@ const userWidth = maingame.offsetWidth;
 const userHeight = maingame.offsetHeight;
 
 const snakeHead = new Image();
-snakeHead.src = "/Assest/Images/snakeHead.png";
+snakeHead.src = "Assest/Images/snakeHead.png";
 
 const foodImg = new Image();
-foodImg.src = "/Assest/Images/apple.png";
+foodImg.src = "Assest/Images/apple.png";
 
 for (let i = userWidth; i >= 0; i--) {
   if ((i / 32) % 2 == 0) {
