@@ -1,11 +1,8 @@
 function groundDraw() {
-  let widthRes = canvas.clientWidth / 32;
-
   let y = 0;
   let rowColor = 0;
-
-  while (y <= 544) {
-    for (let i = 0; i <= widthRes; i++) {
+  while (y <= maxHeight) {
+    for (let i = 0; i <= maxWidth - 32; i++) {
       if (rowColor % 2 == 0) {
         ctx.fillStyle = i % 2 == 0 ? "#273c75" : "#40739e";
         ctx.fillRect(i * 32, y, box, box);
@@ -89,18 +86,18 @@ function draw() {
   if (snakeX === food.x && snakeY === food.y) {
     score++;
     food = {
-      x: Math.floor(Math.random() * 40) * box,
-      y: Math.floor(Math.random() * 17) * box,
+      x: Math.floor(Math.random() * (maxWidth / 32)) * box,
+      y: Math.floor(Math.random() * (maxHeight / 32)) * box,
     };
   } else {
     snake.pop();
   }
 
   if (
-    snakeX >= 1280 ||
+    snakeX >= maxWidth ||
     snakeX < 0 ||
     snakeY < 0 ||
-    snakeY >= 544 ||
+    snakeY >= maxHeight ||
     accident(newHead, snake)
   ) {
     clearInterval(game);
